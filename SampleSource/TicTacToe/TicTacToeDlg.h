@@ -72,4 +72,5 @@ public:
 	int m_startCom;			/* 시작하는 COM 종류 */
 	int m_isLoad;			/* 게임이 로드 된 건지 구분 */
 	int m_checkUndo;		/* 무르기를 했는지 여부 구분 */
+	afx_msg void OnBnClickedA1();
 };

@@ -78,6 +78,7 @@ BEGIN_MESSAGE_MAP(CTicTacToeDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_UNDO_A, &CTicTacToeDlg::OnBnClickedButtonUndoA)
 	ON_BN_CLICKED(IDC_BUTTON_UNDO_B, &CTicTacToeDlg::OnBnClickedButtonUndoB)
 	ON_WM_CTLCOLOR()
+	ON_BN_CLICKED(IDC_A1, &CTicTacToeDlg::OnBnClickedA1)
 END_MESSAGE_MAP()
 
 
@@ -471,7 +472,7 @@ void CTicTacToeDlg::ResetGame()
 	{
 		for(int j=0; j<3; j++)
 		{
-			str.Format(L"%d", count+1);
+			str.Format(L"%c", 'B');	/* 'B'로 출력 */
 			SetDlgItemText(1001+count, str);
 			SetDlgItemText(1011+count, str);
 			count++;
@@ -616,7 +617,7 @@ void CTicTacToeDlg::UpdateGame()
 				SetDlgItemText(comButton+count, L"O");
 			else
 			{
-				str.Format(L"%d", count+1);
+				str.Format(L"%c", 'B');	/* 'B'로 출력 */
 				SetDlgItemText(comButton+count, str);
 			}
 			count++;
@@ -642,7 +643,7 @@ void CTicTacToeDlg::UpdateGame()
 				}
 				else
 				{
-					str.Format(L"%d", count+1);
+					str.Format(L"%c", 'B');	/* 'B'로 출력 */
 					SetDlgItemText(IDC_A1+count, str);
 					SetDlgItemText(IDC_B1+count, str);
 				}
@@ -715,4 +716,9 @@ void CTicTacToeDlg::LoadGame()
 			fclose(fp);
 		}
 	}
-}
+	}
+
+	void CTicTacToeDlg::OnBnClickedA1()
+	{
+		// TODO: Add your control notification handler code here
+	}
