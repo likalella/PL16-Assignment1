@@ -47,6 +47,17 @@ Node* TicTacToeAI::GetRootNode()
 };
 
 /**
+	lika
+	함 수 : GetEvaluation()
+	기 능 : 보드에 출력할 Evaluation 반환
+*/
+Evaluation* TicTacToeAI::GetEvaluation()
+{
+	this->GetSymmeticEval();
+	return evaluation;
+}
+
+/**
 	함 수 : GetBestMove()
 	기 능 : 최적의 좌표를 Minimax 알고리즘을 통해 구함
 */
@@ -150,6 +161,47 @@ int TicTacToeAI::Maximize(struct treeNode* root)
 	}
 	root->childCnt = possible;					/* 자식 노드개수 저장 */
 	return bestValue;							/* bestValue 값 반환 */
+};
+
+/**
+	lika
+	함 수 : GetSymmeticEval()
+	기 능 : Symmetic한 부분의 Eval값을 구하는 함수.
+*/
+void TicTacToeAI::GetSymmeticEval()
+{
+	int	check = 0;	/* 대칭성 검사 변수 */
+	int k = 0;
+	int temp = evaluation->possible;
+
+	GameBoard tempBoard = tttBoard;	/* 게임판 복사 */
+
+	for (int i = 0; i<3; i++)
+	{
+		for (int j = 0; j<3; j++)
+		{
+			if (tttBoard.board[i][j] == ' ')
+			{
+				check = 0;
+				for (int k = 0; k<temp; k++)
+				{
+					if (evaluation->x[k] == i && evaluation->y[k] == j)
+						continue;
+					tttBoard.DoMove(i, j);
+					tempBoard.DoMove(evaluation->x[k], evaluation->y[k]);
+					check = CheckSymmetric(tempBoard, tttBoard);	/* 대칭성 검사 */
+					tempBoard.UndoMove();
+					tttBoard.UndoMove();
+					if (check == 1){		/* 대칭한 부분 이라면 */
+						evaluation->possible++;
+						evaluation->x[evaluation->possible - 1] = i;
+						evaluation->y[evaluation->possible - 1] = j;
+						evaluation->eval[evaluation->possible - 1] = evaluation->eval[k];
+					}
+				}
+			}
+		}
+	}
 };
 
 /**
