@@ -54,13 +54,13 @@ Node* TicTacToeAI::GetRootNode()
 */
 Evaluation* TicTacToeAI::GetEvaluation()
 {
-	this->GetSymmeticEval();
+	this->GetSymmetricEval();
 	return evaluation;
 }
 
 /**
-함 수 : GetBestMove()
-기 능 : 최적의 좌표를 Minimax 알고리즘을 통해 구함
+	함 수 : GetBestMove()
+	기 능 : 최적의 좌표를 Minimax 알고리즘을 통해 구함
 */
 void TicTacToeAI::GetBestMove()
 {
@@ -73,7 +73,7 @@ void TicTacToeAI::GetBestMove()
 
 	for (int i = 0, j = 0; i < possible; i++, j++)				/* 가능한 수 만큼 Minimax 알고리즘을 사용하여 수를 계산 */
 	{
-		if (tttBoard.moveCnt < 3 && iList[i].x == 1 && iList[i].y == 1){	/* like : 4번째 이전에 (1,1)에 둘 수 없게 예외처리*/
+		if (tttBoard.moveCnt < 3 && iList[i].x == 1 && iList[i].y == 1){	/* lika : 4번째 이전에 (1,1)에 둘 수 없게 예외처리*/
 			evaluation->possible--;
 			j--;
 			continue;
@@ -178,7 +178,7 @@ int TicTacToeAI::Maximize(struct treeNode* root)
 	함 수 : GetSymmeticEval()
 	기 능 : Symmetic한 부분의 Eval값을 구하는 함수.
 */
-void TicTacToeAI::GetSymmeticEval()
+void TicTacToeAI::GetSymmetricEval()
 {
 	int	check = 0;	/* 대칭성 검사 변수 */
 	int k = 0;
