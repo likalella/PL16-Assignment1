@@ -12,6 +12,14 @@ typedef struct treeNode		/* 출력을 위한 노드 구조체 */
 	struct treeNode* next[9];	/* 자식 노드들 */
 }Node;
 
+typedef struct evalData /* lika : eval 출력을 위한 구조체 */
+{
+	int possible;		/* lika : 가능한 개수 저장하는 변수  */
+	int x[9];			/* lika : 가능한 위치의 x(행정보)를 저장하는 배열 */
+	int y[9];			/* lika : 가능한 위치의 y(열정보)를 저장하는 배열 */
+	int eval[9];		/* lika : 가능한 위치의 eval를 저장하는 배열 */
+}Evaluation;
+
 class GameBoard
 {
 public :

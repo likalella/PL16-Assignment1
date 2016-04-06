@@ -60,6 +60,7 @@ public:
 	void UpdateGame();		/* 게임 수를 화면에 업데이트 */
 	void ResetGame();		/* 게임판을 다시 초기화 */
 	void PrintTreeNode(Node* root);	/* eval 값 노드들을 출력 */
+	void PrintEval(Evaluation* eval); /* lika : eval 값을 보드에 출력*/
 	void StartGame();			/* 게임 시작 */
 	void EndGame();				/* 게임 종료 */
 	void LoadGame();			/* 게임 불러오기 */
