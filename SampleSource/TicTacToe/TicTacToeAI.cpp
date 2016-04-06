@@ -9,6 +9,7 @@ TicTacToeAI::TicTacToeAI(GameBoard board)
 {
 	tttBoard = board;
 	root = new Node;
+	evaluation = new Evaluation;
 	InitNode(root, 0);
 
 	if(tttBoard.moveCnt % 2 == 0)
@@ -58,27 +59,36 @@ Evaluation* TicTacToeAI::GetEvaluation()
 }
 
 /**
-	함 수 : GetBestMove()
-	기 능 : 최적의 좌표를 Minimax 알고리즘을 통해 구함
+함 수 : GetBestMove()
+기 능 : 최적의 좌표를 Minimax 알고리즘을 통해 구함
 */
 void TicTacToeAI::GetBestMove()
 {
 	Position iList[9];				/* 현재 게임판에서 놓을 수 있는 좌표 개수, 위치 저장 */
 	int	bestValue = -10000;			/* besteval 값 선언 */
 	int	possible = 0;				/* 가능한 개수 저장 변수 */
-		
-	possible = GetPossibleMove(iList);	/*현재 가능한 수 좌표, 개수 저장 */
 
-	for( int i = 0; i < possible; i++ )				/* 가능한 수 만큼 Minimax 알고리즘을 사용하여 수를 계산 */
+	possible = GetPossibleMove(iList);	/*현재 가능한 수 좌표, 개수 저장 */
+	evaluation->possible = possible; /* lika : evaluation에 현재 가능한 수 좌표의 개수 저장 */
+
+	for (int i = 0, j = 0; i < possible; i++, j++)				/* 가능한 수 만큼 Minimax 알고리즘을 사용하여 수를 계산 */
 	{
-		root->next[i] = new Node;					/* 새로운 노드 생성 */
-		InitNode(root->next[i], (root->depth)+1);	/* 노드 초기화 */
-		tttBoard.DoMove(iList[i].x , iList[i].y);	/* 가능한 수를 둠 */
-		int newValue = Minimize(root->next[i]);		/* Min함수호출로 값을 구해서 */
-		root->next[i]->eval = newValue;				/* 노드에 저장 */
+		if (tttBoard.moveCnt < 3 && iList[i].x == 1 && iList[i].y == 1){	/* like : 4번째 이전에 (1,1)에 둘 수 없게 예외처리*/
+			evaluation->possible--;
+			j--;
+			continue;
+		}
+		root->next[j] = new Node;					/* 새로운 노드 생성 */
+		InitNode(root->next[j], (root->depth) + 1);	/* 노드 초기화 */
+		tttBoard.DoMove(iList[i].x, iList[i].y);	/* 가능한 수를 둠 */
+		evaluation->x[j] = iList[i].x;				/* lika : evaluation에 둘 수 있는 좌표의 x(행정보) 저장 */
+		evaluation->y[j] = iList[i].y;				/* lika : evaluation에 둘 수 있는 좌표의 y(열정보) 저장 */
+		int newValue = Minimize(root->next[j]);		/* Min함수호출로 값을 구해서 */
+		root->next[j]->eval = newValue;				/* 노드에 저장 */
+		evaluation->eval[j] = newValue;				/* lika : evaluation에 둘 수 있는 좌표의 eval값 저장 */
 		tttBoard.UndoMove();						/* 두었던 수를 무름 */
 
-		if( newValue > bestValue )		/* 구한 eval값이 best값보다 크다면 */
+		if (newValue > bestValue)		/* 구한 eval값이 best값보다 크다면 */
 		{
 			bestValue = newValue;		/* 값을 변경하고 해당 수정보를 저장 */
 			bestX = iList[i].x;
