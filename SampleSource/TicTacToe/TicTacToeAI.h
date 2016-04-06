@@ -19,9 +19,9 @@ public :
 	Node* GetRootNode();						/* Tree 를 출력하기위한 Node 반환 */
 	Evaluation* GetEvaluation();				/* lika : GameBoard에 Eval을 출력하기 위한 Evaluation 반환 */
 	void GetBestMove();							/* 최적의 좌표를 구함 */	
+	void GetSymmeticEval();						/* lika: Symmetic한 부분의 Eval값을 구함 */
 	int Minimize(struct treeNode* root);		/* Eval 값중 Min 값을 구함 */	
 	int Maximize(struct treeNode* root);		/* Eval 값중 Max 값을 구함 */
-	void GetSymmeticEval();						/* lika: Symmetic한 부분의 Eval값을 구함 */
 	int CheckSymmetric(GameBoard preBoard, GameBoard newBoard);	/* 게임보드 대칭성 검사 */
 	int CheckSameBoard(char (*board1)[3], char (*board2)[3]);	/* 대칭성 검사 중 보드가 일치하는지 검사 */
 	int GetPossibleMove(Position* iList);						/* 현재 보드상태에서 갈수있는 좌표 개수 검사 */
