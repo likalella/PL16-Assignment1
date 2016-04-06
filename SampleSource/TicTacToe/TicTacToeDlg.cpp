@@ -488,7 +488,7 @@ void CTicTacToeDlg::ResetGame()
 	{
 		for(int j=0; j<3; j++)
 		{
-			str.Format(L"%c", 'B');	/* 'B'로 출력 */
+			str.Format(L"%c", 'B');	/* lika : 'B'로 출력 */
 			SetDlgItemText(1001+count, str);
 			SetDlgItemText(1011+count, str);
 			count++;
@@ -633,7 +633,7 @@ void CTicTacToeDlg::UpdateGame()
 				SetDlgItemText(comButton+count, L"O");
 			else
 			{
-				str.Format(L"%c", 'B');	/* 'B'로 출력 */
+				str.Format(L"%c", 'B');	/* lika : 'B'로 출력 */
 				SetDlgItemText(comButton+count, str);
 			}
 			count++;
@@ -659,7 +659,7 @@ void CTicTacToeDlg::UpdateGame()
 				}
 				else
 				{
-					str.Format(L"%c", 'B');	/* 'B'로 출력 */
+					str.Format(L"%c", 'B');	/* lika : 'B'로 출력 */
 					SetDlgItemText(IDC_A1+count, str);
 					SetDlgItemText(IDC_B1+count, str);
 				}
@@ -732,9 +732,4 @@ void CTicTacToeDlg::LoadGame()
 			fclose(fp);
 		}
 	}
-	}
-
-	void CTicTacToeDlg::OnBnClickedA1()
-	{
-		// TODO: Add your control notification handler code here
-	}
+}

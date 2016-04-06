@@ -106,6 +106,9 @@ void GameBoard::RandomMove()
 		newX = rand()%3;
 		newY = rand()%3;
 
+		if (moveCnt < 3 && newX == 1 && newY == 1) /* lika : 4번째 차례 이전에 (1,1)에 둘수 없게 함. */
+			continue;
+
 		if(moveCnt <= 7)	/* 빈 좌표가 2개 이상일때 */
 		{
 			if((newX != preX) && (newY != preY))	/* 랜덤으로생성한 좌표와 이전좌표를 비교하고 */
