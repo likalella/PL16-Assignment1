@@ -358,6 +358,10 @@ void CTicTacToeDlg::StartGame()
 			TicTacToeAI* tttAI = new TicTacToeAI(m_board);	/* 새로운 AI 객체를 생성 */
 
 			tttAI->GetBestMove();							/* 최적의 좌표를 구함 */
+
+			Evaluation* eval = tttAI->GetEvaluation();		/* lika : 보드에 Eval출력하기 위한 Evaluaton 반환 */
+			this->PrintEval(eval);							/* lika : 보드에 Eval 출력 */
+
 			m_board.DoMove(tttAI->bestX, tttAI->bestY);		/* 해당 좌표에 수를 둠 */
 			
 			Node* node = tttAI->GetRootNode();			/* 최적의 좌표를 구하는동안 저장한 트리 중 루트노드 반환 */
@@ -372,6 +376,7 @@ void CTicTacToeDlg::StartGame()
 			}
 
 			delete tttAI;
+			delete eval;		/* lika : delete eval 할당한 메모리 해제 */
 			delete node;
 
 			m_board.CheckState();			/* 게임판 상태를 점검 */
@@ -489,8 +494,10 @@ void CTicTacToeDlg::PrintTreeNode(Node* root)
 		}
 		else							/* 큐에서 꺼낸게 NULL 값 이라면 */
 		{
-			temp = temp + (L")");		/* ')' 로 부모노드를 구분 */
-			preParent = false;
+			if (!que.empty()){	/* lika : ')'가 한번 더 출력되는 예외 처리 */
+				temp = temp + (L")"); /* ')' 로 부모노드를 구분 */
+				preParent = false;
+			}
 		}
 	}
 	temp = temp + (L")");
