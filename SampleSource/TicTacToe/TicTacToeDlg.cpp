@@ -273,20 +273,28 @@ int CTicTacToeDlg::CheckReady()
 		return 0;
 	else
 	{
-		switch(level_a)
+		switch (level_a)
 		{
-		case 0 : m_levelA = 1; break;			
-		case 1 : m_levelA = 3; break;			
-		case 2 : m_levelA = 5; break;		
-		case 3 : m_levelA = 7; break;			
+		case 0: m_levelA = 1; break;
+		case 1: m_levelA = 2; break;
+		case 2: m_levelA = 3; break;
+		case 3: m_levelA = 4; break;
+		case 4: m_levelA = 5; break;
+		case 5: m_levelA = 6; break;
+		case 6: m_levelA = 7; break;
+		case 7: m_levelA = 8; break;
 		}
 
-		switch(level_b)
+		switch (level_b)
 		{
-		case 0 : m_levelB = 2; break;			
-		case 1 : m_levelB = 4; break;			
-		case 2 : m_levelB = 7; break;		
-		case 3 : m_levelB = 8; break;			
+		case 0: m_levelB = 1; break;
+		case 1: m_levelB = 2; break;
+		case 2: m_levelB = 3; break;
+		case 3: m_levelB = 4; break;
+		case 4: m_levelB = 5; break;
+		case 5: m_levelB = 6; break;
+		case 6: m_levelB = 7; break;
+		case 7: m_levelB = 8; break;
 		}
 
 		return 1;
@@ -297,14 +305,22 @@ void CTicTacToeDlg::SetGame()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	m_comboA.AddString(L"Level 1");
+	m_comboA.AddString(L"Level 2");
 	m_comboA.AddString(L"Level 3");
+	m_comboA.AddString(L"Level 4");
 	m_comboA.AddString(L"Level 5");
+	m_comboA.AddString(L"Level 6");
 	m_comboA.AddString(L"Level 7");
+	m_comboA.AddString(L"Level 8");
 
+	m_comboB.AddString(L"Level 1");
 	m_comboB.AddString(L"Level 2");
+	m_comboB.AddString(L"Level 3");
 	m_comboB.AddString(L"Level 4");
+	m_comboB.AddString(L"Level 5");
 	m_comboB.AddString(L"Level 6");
-	m_comboB.AddString(L"Level 8");	
+	m_comboB.AddString(L"Level 7");
+	m_comboB.AddString(L"Level 8");
 
 	GetDlgItem(IDC_EDIT_A)->SetWindowTextW(L"<게임 트리>");
 	GetDlgItem(IDC_EDIT_B)->SetWindowTextW(L"<게임 트리>");
