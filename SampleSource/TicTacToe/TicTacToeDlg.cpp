@@ -494,7 +494,7 @@ void CTicTacToeDlg::PrintTreeNode(Node* root)
 		}
 		else							/* 큐에서 꺼낸게 NULL 값 이라면 */
 		{
-			if (!que.empty()){	/* lika : ')'가 한번 더 출력되는 예외 처리 */
+			if (!que.empty() && preParent == true){	/* lika : ')'가 한번 더 출력되는 예외 처리 */
 				temp = temp + (L")"); /* ')' 로 부모노드를 구분 */
 				preParent = false;
 			}
