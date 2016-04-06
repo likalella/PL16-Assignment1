@@ -78,7 +78,6 @@ BEGIN_MESSAGE_MAP(CTicTacToeDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_UNDO_A, &CTicTacToeDlg::OnBnClickedButtonUndoA)
 	ON_BN_CLICKED(IDC_BUTTON_UNDO_B, &CTicTacToeDlg::OnBnClickedButtonUndoB)
 	ON_WM_CTLCOLOR()
-	ON_BN_CLICKED(IDC_A1, &CTicTacToeDlg::OnBnClickedA1)
 END_MESSAGE_MAP()
 
 
@@ -387,6 +386,62 @@ void CTicTacToeDlg::StartGame()
 	}
 	else					/* 시작 순서 설정이 안되어있을때 오류 출력 */
 		MessageBox(L"ERROR : 시작순서 설정을 확인하세요!", L"Error!", MB_ICONERROR);
+}
+
+/**
+	lika
+	함 수 : PrintEval(Evaluation* eval)
+	기 능 : Board에 Eval값을 출력해줌.
+*/
+void CTicTacToeDlg::PrintEval(Evaluation* eval){
+	int count = 0;
+	int comButton = 0;
+	int temp[3][3] = { 0 };
+	DWORD dwStart;
+	dwStart = GetTickCount();
+	CString str;
+
+	for (int i = 0; i < eval->possible; i++){
+		temp[eval->x[i]][eval->y[i]] = eval->eval[i];
+	}
+
+	if (m_board.moveCnt % 2 == 1)
+	{
+		if (m_board.starterCom == 'X')
+			comButton = IDC_B1;
+		else
+			comButton = IDC_A1;
+	}
+	else
+	{
+		if (m_board.starterCom == 'X')
+			comButton = IDC_A1;
+		else
+			comButton = IDC_B1;
+	}
+
+	for (int i = 0; i<3; i++)
+	{
+		for (int j = 0; j<3; j++)
+		{
+			if (m_board.board[i][j] == 'X')
+				SetDlgItemText(comButton + count, L"X");
+			else if (m_board.board[i][j] == 'O')
+				SetDlgItemText(comButton + count, L"O");
+			else
+			{
+				str.Format(L"%d", temp[i][j]);
+				SetDlgItemText(comButton + count, str);
+				if (m_board.moveCnt < 3 && i == 1 && j == 1){ /* lika : 4번째 턴 전에는 (1,1)은 Eval값대신 'B'출력 */
+					str.Format(L"%c", 'B');
+					SetDlgItemText(comButton + count, str);
+				}
+			}
+			count++;
+		}
+	}
+
+	while (GetTickCount() - dwStart < 3000); /* Board에 Eval값을 3초간 출력 */
 }
 
 /**
