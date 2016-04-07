@@ -9,7 +9,7 @@ TicTacToeAI::TicTacToeAI(GameBoard board)
 {
 	tttBoard = board;
 	root = new Node;
-	evaluation = new Evaluation;
+	evaluation = new Evaluation;	/* lika : evaluation 추가 */
 	InitNode(root, 0);
 
 	if(tttBoard.moveCnt % 2 == 0)
@@ -175,8 +175,8 @@ int TicTacToeAI::Maximize(struct treeNode* root)
 
 /**
 	lika
-	함 수 : GetSymmeticEval()
-	기 능 : Symmetic한 부분의 Eval값을 구하는 함수.
+	함 수 : GetSymmetricEval()
+	기 능 : Symmetric한 부분의 Eval값을 구하는 함수.
 */
 void TicTacToeAI::GetSymmetricEval()
 {

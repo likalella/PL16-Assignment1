@@ -87,7 +87,7 @@ void GameBoard::InitBoard(int startCom, int movedCnt, int nlevelA, int nlevelB)
 };
 
 /**
-	함 수 : RandomMove(int preX, int preY)
+	함 수 : RandomMove()
 	기 능 : 무르기를 시전했을때 이전에 놓았던 수와 다른곳에 놓도록 랜덤하게 좌표생성
 */
 void GameBoard::RandomMove()

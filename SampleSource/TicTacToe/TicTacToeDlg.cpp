@@ -272,6 +272,7 @@ int CTicTacToeDlg::CheckReady()
 		return 0;
 	else
 	{
+		/* lika : ComputerA, B 모두 1~8까지 Level-Look ahead를 가지도록 수정 */
 		switch (level_a)
 		{
 		case 0: m_levelA = 1; break;
@@ -303,6 +304,7 @@ int CTicTacToeDlg::CheckReady()
 void CTicTacToeDlg::SetGame()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	/* lika : ComputerA, B 모두 1~8까지 Level-Look ahead를 가지도록 수정 */
 	m_comboA.AddString(L"Level 1");
 	m_comboA.AddString(L"Level 2");
 	m_comboA.AddString(L"Level 3");
@@ -446,7 +448,7 @@ void CTicTacToeDlg::PrintEval(Evaluation* eval){
 		}
 	}
 
-	while (GetTickCount() - dwStart < 3000); /* Board에 Eval값을 3초간 출력 */
+	while (GetTickCount() - dwStart < 3000); /* lika : Board에 Eval값을 3초간 출력 */
 }
 
 /**
